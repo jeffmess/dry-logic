@@ -44,6 +44,8 @@ module Dry
       end
 
       def self.build(predicate, args: EMPTY_ARRAY, arity: predicate.arity, **options)
+        puts "-----------------"
+        puts specialize(arity, args.size).inspect
         specialize(arity, args.size).new(predicate, {args: args, arity: arity, **options})
       end
 

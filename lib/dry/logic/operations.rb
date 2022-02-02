@@ -7,6 +7,7 @@ require "dry/logic/operations/implication"
 require "dry/logic/operations/negation"
 
 require "dry/logic/operations/key"
+require "dry/logic/operations/dynamic_key"
 require "dry/logic/operations/attr"
 require "dry/logic/operations/each"
 require "dry/logic/operations/set"

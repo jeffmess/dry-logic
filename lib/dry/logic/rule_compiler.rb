@@ -39,6 +39,11 @@ module Dry
         Operations::Key.new(visit(predicate), name: name)
       end
 
+      def visit_dynamic_key(node)
+        name, predicate = node
+        Operations::DynamicKey.new(visit(predicate), name: name)
+      end
+
       def visit_attr(node)
         name, predicate = node
         Operations::Attr.new(visit(predicate), name: name)

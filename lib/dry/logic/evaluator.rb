@@ -35,6 +35,15 @@ module Dry
         alias_method :[], :call
       end
 
+      class DynamicKey < Evaluator
+        def call(input)
+          puts " EVAL "
+          puts input.inspect
+          path.reduce(input) { |a, e| a[e] }
+        end
+        alias_method :[], :call
+      end
+
       class Attr < Evaluator
         def call(input)
           path.reduce(input) { |a, e| a.public_send(e) }

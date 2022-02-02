@@ -27,6 +27,8 @@ RSpec.shared_examples "predicates" do
 
   let(:key?) { Dry::Logic::Predicates[:key?] }
 
+  let(:dynamic_key?) { Dry::Logic::Predicates[:dynamic_key?] }
+
   let(:attr?) { Dry::Logic::Predicates[:attr?] }
 
   let(:eql?) { Dry::Logic::Predicates[:eql?] }

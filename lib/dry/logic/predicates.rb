@@ -42,6 +42,10 @@ module Dry
           input.key?(name)
         end
 
+        def dynamic_key?(name, input)
+          input.values.all? { |v| v.key?(name) }
+        end
+
         def attr?(name, input)
           input.respond_to?(name)
         end

@@ -7,7 +7,7 @@ require "dry/logic/result"
 module Dry
   module Logic
     module Operations
-      class Key < Unary
+      class DynamicKey < Unary
         attr_reader :evaluator
 
         attr_reader :path
@@ -18,13 +18,12 @@ module Dry
           else
             name = options.fetch(:name)
             eval = options.fetch(:evaluator, evaluator(name))
-            puts eval.inspect
             super(rules, **options, evaluator: eval, path: name)
           end
         end
 
         def self.evaluator(name)
-          Evaluator::Key.new(name)
+          Evaluator::DynamicKey.new(name)
         end
 
         def initialize(*rules, **options)
@@ -34,7 +33,7 @@ module Dry
         end
 
         def type
-          :key
+          :dynamic_key
         end
 
         def call(hash)
@@ -53,7 +52,6 @@ module Dry
         end
 
         def ast(input = Undefined)
-          byebug
           if input.equal?(Undefined) || !input.is_a?(Hash)
             [type, [path, rule.ast]]
           else

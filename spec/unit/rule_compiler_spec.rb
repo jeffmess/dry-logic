@@ -17,6 +17,7 @@ RSpec.describe Dry::Logic::RuleCompiler, "#call" do
 
   let(:rule) { Dry::Logic::Rule::Predicate.build(predicate) }
   let(:key_op) { Dry::Logic::Operations::Key.new(rule, name: :email) }
+  let(:dynamic_key_op) { Dry::Logic::Operations::DynamicKey.new(rule, name: :email) }
   let(:attr_op) { Dry::Logic::Operations::Attr.new(rule, name: :email) }
   let(:check_op) { Dry::Logic::Operations::Check.new(rule, keys: [:email]) }
   let(:not_key_op) { Dry::Logic::Operations::Negation.new(key_op) }
@@ -25,6 +26,14 @@ RSpec.describe Dry::Logic::RuleCompiler, "#call" do
   let(:xor_op) { key_op.curry(:email) ^ rule }
   let(:set_op) { Dry::Logic::Operations::Set.new(rule) }
   let(:each_op) { Dry::Logic::Operations::Each.new(rule) }
+
+  it "compiles dynamic key rules" do
+    ast = [[:dynamic_key, [:email, [:predicate, [:filled?, [[:input, undefined]]]]]]]
+
+    rules = compiler.(ast)
+
+    expect(rules).to eql([dynamic_key_op])
+  end
 
   it "compiles key rules" do
     ast = [[:key, [:email, [:predicate, [:filled?, [[:input, undefined]]]]]]]
