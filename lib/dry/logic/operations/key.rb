@@ -18,7 +18,6 @@ module Dry
           else
             name = options.fetch(:name)
             eval = options.fetch(:evaluator, evaluator(name))
-            puts eval.inspect
             super(rules, **options, evaluator: eval, path: name)
           end
         end
@@ -53,7 +52,6 @@ module Dry
         end
 
         def ast(input = Undefined)
-          byebug
           if input.equal?(Undefined) || !input.is_a?(Hash)
             [type, [path, rule.ast]]
           else

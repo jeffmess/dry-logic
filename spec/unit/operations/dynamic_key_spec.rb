@@ -26,7 +26,8 @@ RSpec.describe Dry::Logic::Operations::DynamicKey do
 
         expect(result.to_ast).to eql(
           [:failure, [:user, [:dynamic_key,
-                              [:user, [:predicate, [:dynamic_key?, [:key, [:name, :age], [:input, {'1': {name: 'test'}}]]]]]]]]
+                              [:user, [:predicate, [:dynamic_key?,
+                                                    [[:key, [:name, :age]], [:input, {'1': {name: 'test'}}]]]]]]]]
         )
       end
     end

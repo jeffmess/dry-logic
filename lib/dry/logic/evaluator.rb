@@ -37,8 +37,6 @@ module Dry
 
       class DynamicKey < Evaluator
         def call(input)
-          puts " EVAL "
-          puts input.inspect
           path.reduce(input) { |a, e| a[e] }
         end
         alias_method :[], :call
